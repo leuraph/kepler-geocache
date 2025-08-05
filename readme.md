@@ -1,5 +1,34 @@
 # GeoCache: Kepler
 
+## Problem
+Ein Satelit, der sich auf einer kreisförmigen
+Bahn um einen Planeten bewegt,
+wurde von einem Gesteinsbrocken getroffen
+und ist deshalb auf den Planeten gestürzt.
+
+Der Satelit ist auf einer Bahn mit Radius
+$R_{\text{Satelit}} =$ unterwegs.
+Zum Zeitpunkt des Aufpralls hat sich der Satelit 
+bei genau
+TODO Grad Osten
+über dem Äquator befunden und seine Geschwindigkeit hat
+(von Norden aus gemessen), genau 45° in Richtung Osten gezeigt.
+
+Durch den Aufprall wurde der Satelit abgebremst,
+aber nicht abgelenkt, und seine Geschwindigkeit betrug
+nach dem Aufprall noch
+TODO%
+seiner Anfangsgeschwindigkeit.
+
+Der kreisförmige Planet dreht sich von Westen nach Osten,
+hat einen Radius von
+$R_{\text{Planet}} = $,
+eine Tagesdauer von $24$ h,
+und eine Mittlere Dichte von
+$\rho_{\text{Planet}} = $.
+
+Wo ist der Satelit auf den Planeten gestürzt?
+
 ## Solving the equations of motion
 
 The Lagrangian of the system is given by
