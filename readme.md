@@ -7,30 +7,49 @@ wurde von einem Gesteinsbrocken getroffen
 und ist deshalb auf den Planeten gestürzt.
 
 Der Satelit ist auf einer Bahn mit Radius
-$R_{\text{Satelit}} =$ unterwegs.
-Zum Zeitpunkt des Aufpralls hat sich der Satelit 
-bei genau
-TODO Grad Osten
-über dem Äquator befunden und seine Geschwindigkeit hat
+$R_{\text{S}} =2 R_{\text{P}}$ unterwegs.
+Zum Zeitpunkt der Kollision mit dem unbekannten Objekt
+hat sich der Satelit bei genau
+$0$
+Grad Osten über dem Äquator befunden und seine Geschwindigkeit hat
 (von Norden aus gemessen), genau 45° in Richtung Osten gezeigt.
 
 Durch den Aufprall wurde der Satelit abgebremst,
 aber nicht abgelenkt, und seine Geschwindigkeit betrug
 nach dem Aufprall noch
-TODO%
+$\alpha = 0.5$
 seiner Anfangsgeschwindigkeit.
 
 Der kreisförmige Planet dreht sich von Westen nach Osten,
 hat einen Radius von
-$R_{\text{Planet}} = $,
-eine Tagesdauer von $24$ h,
+$R_{\text{P}} = 5700$ km,
+eine Tagesdauer von $24~\text{h}$,
 und eine Mittlere Dichte von
-$\rho_{\text{Planet}} = $.
+$\rho_{\text{P}} = 3.344~\frac{\text{g}}{\text{cm}^3}$.
 
 Wo ist der Satelit auf den Planeten gestürzt?
 
-## Solving the equations of motion
+## Computing Initial Conditions
 
+Um die Bahngeschwindigkeit $v_{\text{S}}$ des Sateliten
+vor der Kollision zu bestimmen, setzen wir die Zentripetalkraft
+mit der Gravitationskraft gleich, i.e.
+$$
+\frac{Gm_{\text{S}}M_{\text{P}}}{R_{\text{S}}^2}
+=
+\frac{m_{\text{S}}v_{\text{S}}^2}{R_{\text{S}}}.
+$$
+Wir finden also
+$$
+v_{\text{S}} = \sqrt{\frac{GM_{\text{P}}}{R_{\text{S}}}}.
+$$
+
+## Equations of motion
+
+In the following, we drop the indices $\text S$ and $\text P$.
+Due to the conservation of angular momentum,
+the motion of the satellite takes place in a plane.
+For convenience, we work in polar coordinates $(r, \theta)$.
 The Lagrangian of the system is given by
 $$
     L
@@ -42,19 +61,13 @@ $$
     - V(r),
 $$
 
-where the Gravitational Potential is
+where the Gravitational Potential $V$ is given by
 
 $$
-    V(r) = - \frac{k}{r},
+    V(r) = - \frac{GMm}{r},
 $$
 
-with
-
-$$
-    k := GMm.
-$$
-
-The Euler-Lagrange Equations are therefore given by
+The Euler-Lagrange Equations are given by
 
 $$
     \begin{align}
@@ -75,17 +88,19 @@ $$
     \ell := m r^2 \dot \theta \equiv \mathrm{const}.
 $$
 
-The latter implies the conservation of total energy,
+It can be shown that the total energy $E$
+of the system is conserved
+(either using the EOM of the coordinate $r$
+or by using $\mathrm d L/ \mathrm d t = 0$),
 that is
-
 $$
     E
     := \frac{1}{2} m \dot r^2
     + \frac{\ell^2}{2mr^2}
-    + V(r) \equiv \mathrm{const},
+    + V(r) \equiv \mathrm{const}.
 $$
 
-and hence, the Euler-Lagrange equations reduce to the
+Hence, the Euler-Lagrange equations reduce to the
 first order system
 
 $$

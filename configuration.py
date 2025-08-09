@@ -1,4 +1,4 @@
-from initial_conditions import InitialConditions, theta_prime
+from initial_conditions import InitialConditions
 import numpy as np
 from scipy.constants import G
 
