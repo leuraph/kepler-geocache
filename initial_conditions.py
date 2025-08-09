@@ -78,3 +78,30 @@ def r_prime(m: float, M: float, r: float, l: float, E: float) -> float:
             E - effective_potential(m=m, M=M, r=r, l=l)
         )
     )
+
+
+def eccentricity(
+        total_energy: float,
+        m: float,
+        M: float,
+        angular_momentum: float) -> float:
+    """source: https://de.wikipedia.org/wiki/Zweik%C3%B6rperproblem"""
+    h = angular_momentum / m
+    e = np.sqrt(1. + (2. * total_energy * h**2)/((G*M)**2 * m))
+    return e
+
+
+def radius(
+        theta: float,
+        theta_0: float,
+        angular_momentum: float,
+        m: float, M: float,
+        total_energy: float) -> float:
+    """https://de.wikipedia.org/wiki/Zweik%C3%B6rperproblem"""
+    h = angular_momentum / m
+    e = eccentricity(
+        total_energy=total_energy,
+        m=m, M=M, angular_momentum=angular_momentum)
+    numerator = h**2 / (G*M)
+    denominator = 1. + e * np.cos(theta - theta_0)
+    return numerator / denominator
