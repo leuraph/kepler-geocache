@@ -55,7 +55,7 @@ def gravity_rhs(
     u in R^6 is the euclidean coordinate and velocity, i.e.
     u = [x, y, z, x_dot, y_dot, z_dot]
     """
-    k = G * initial_conditions.m * initial_conditions.M
+    k = G * initial_conditions.M
     x, y, z, x_dot, y_dot, z_dot = u
 
     r = np.sqrt(x**2 + y**2 + z**2)
