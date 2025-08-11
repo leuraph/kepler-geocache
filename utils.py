@@ -39,11 +39,28 @@ def get_final_coordinates(
 def kepler_rhs(
         initial_conditions: InitialConditions,
         t: float,
-        y: tuple[float, float]) -> tuple[float, float]:
+        y: tuple[float, float, float]) -> tuple[float, float, float]:
     r, r_dot, theta = y
     theta_dot = initial_conditions.conserved_angular_momentum / (initial_conditions.m * r**2)
     r_ddot = r * theta_dot**2 - G * initial_conditions.M / r**2
     return [r_dot, r_ddot, theta_dot]
+
+
+def gravity_rhs(
+        initial_conditions: InitialConditions,
+        t: float,
+        z: tuple[float, float, float, float]) -> tuple:
+    """
+    returns the rhs of the gravitational ODE, assuming that
+    z in R^4 is the euclidean coordinate and velocity, i.e.
+    z=[x, y, x_dot, y_dot]
+    """
+    k = G * initial_conditions.m * initial_conditions.M
+    x, y, x_dot, y_dot = z
+
+    r = np.sqrt(x**2 + y**2)
+
+    return [x_dot, y_dot, -k/r**3 * x, -k/r**3 * y]
 
 
 def eccentricity(
@@ -84,7 +101,7 @@ def compute_theta_hit_closed_form(initial_conditions: InitialConditions) -> floa
             theta_0=np.pi,
             initial_conditions=initial_conditions)
         return final_radius - R_planet
-    theta_hit = root(fun=F, x0=1.0, options={'xtol': 1e-6}).x
+    theta_hit = root(fun=F, x0=1.0, options={'xtol': 1e-8}).x
     return theta_hit
 
 
@@ -137,7 +154,7 @@ def compute_dt_from_ode_via_theta_hit(
 
         return theta_end - theta_hit
 
-    t_hit = root(fun=F, x0=t_guess, options={'xtol': 1e-6}).x
+    t_hit = root(fun=F, x0=t_guess, options={'xtol': 1e-8}).x
     return t_hit
 
 
@@ -165,7 +182,7 @@ def compute_dt_from_ode_via_radius(
 
         return r_end - R_planet
 
-    t_hit = root(fun=F, x0=t_guess, options={'xtol': 1e-6}).x
+    t_hit = root(fun=F, x0=t_guess, options={'xtol': 1e-8}).x
     return t_hit
 
 
@@ -194,5 +211,5 @@ def compute_dt_from_ode_via_theta_hit(
 
         return theta_end - theta_hit
 
-    t_hit = root(fun=F, x0=t_guess, options={'xtol': 1e-6}).x
+    t_hit = root(fun=F, x0=t_guess, options={'xtol': 1e-8}).x
     return t_hit
