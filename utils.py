@@ -49,18 +49,18 @@ def kepler_rhs(
 def gravity_rhs(
         initial_conditions: InitialConditions,
         t: float,
-        z: tuple[float, float, float, float]) -> tuple:
+        u) -> tuple[float, float, float, float, float, float]:
     """
     returns the rhs of the gravitational ODE, assuming that
-    z in R^4 is the euclidean coordinate and velocity, i.e.
-    z=[x, y, x_dot, y_dot]
+    u in R^6 is the euclidean coordinate and velocity, i.e.
+    u = [x, y, z, x_dot, y_dot, z_dot]
     """
     k = G * initial_conditions.m * initial_conditions.M
-    x, y, x_dot, y_dot = z
+    x, y, z, x_dot, y_dot, z_dot = u
 
-    r = np.sqrt(x**2 + y**2)
+    r = np.sqrt(x**2 + y**2 + z**2)
 
-    return [x_dot, y_dot, -k/r**3 * x, -k/r**3 * y]
+    return [x_dot, y_dot, z_dot, -k/r**3 * x, -k/r**3 * y, -k/r**3 * z]
 
 
 def eccentricity(
