@@ -63,6 +63,34 @@ def gravity_rhs(
     return [x_dot, y_dot, z_dot, -k/r**3 * x, -k/r**3 * y, -k/r**3 * z]
 
 
+def spherical_to_euclidean(r: float, theta: float, phi: float) -> tuple[float, float, float]:
+    """
+    Given spherical coordinates (r, theta, phi), returns Euclidean (x, y, z)
+    theta: polar angle from +z axis
+    phi: azimuthal angle from +x axis in xy-plane
+    """
+    x = r * np.sin(theta) * np.cos(phi)
+    y = r * np.sin(theta) * np.sin(phi)
+    z = r * np.cos(theta)
+    return x, y, z
+
+
+def euclidean_to_spherical(x: float, y: float, z: float) -> tuple[float, float, float]:
+    """
+    Given Euclidean coordinates (x, y, z), returns spherical (r, theta, phi)
+    r: radial distance
+    theta: polar angle from +z axis
+    phi: azimuthal angle from +x axis in xy-plane
+    """
+    r = np.sqrt(x**2 + y**2 + z**2)
+    if r == 0:
+        return 0.0, 0.0, 0.0  # Convention for origin
+
+    theta = np.arccos(z / r)
+    phi = np.arctan2(y, x)
+    return r, theta, phi
+
+
 def eccentricity(
         total_energy: float,
         m: float,
