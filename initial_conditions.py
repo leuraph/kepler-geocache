@@ -9,6 +9,7 @@ class InitialConditions:
     m: float
     M: float
     k: float
+    v_0: float
 
     conserved_angular_momentum: float
     conserved_total_energy: float
@@ -28,6 +29,7 @@ class InitialConditions:
         self.m = m
         self.M = M
         self.k = G * self.M * self.m
+        self.v_0 = theta_prime_0 * r_0
 
         self.conserved_angular_momentum = angular_momentum(
             m=m, r=r_0, theta_prime=theta_prime_0)
