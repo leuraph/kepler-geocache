@@ -24,15 +24,15 @@ def get_final_coordinates(
         theta_hit: float, t_hit,
         omega_planet) -> tuple[float, float]:
     """trigonmetry on a sphere"""
-    alpha = np.pi/4.
-    d_theta = np.arcsin( np.sin(theta_hit)  * np.sin(alpha))
-    d_phi = np.arccos( np.cos(theta_hit) / np.cos(d_theta) )
+    beta = np.pi/4.
+    d_theta = np.arcsin( np.sin(theta_hit) * np.sin(beta) )
+    d_phi = np.arccos(np.cos(theta_hit) / np.cos(d_theta))
 
-    phi = phi_initial + d_phi # Kollision über Äquator
-    theta = theta_initial + d_theta - t_hit * omega_planet
+    phi = phi_initial + d_phi - t_hit * omega_planet
+    theta = theta_initial + d_theta
 
-    N = 360. * phi / (2.* np.pi)  # Breitengrad
-    O = 360. * theta / (2. * np.pi)  # Längengrad
+    N = theta * 360. / (2.*np.pi)  # Breitengrad
+    O = phi * 360. / (2.*np.pi)  # Längengrad
     return N, O
 
 
