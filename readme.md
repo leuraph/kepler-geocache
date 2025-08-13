@@ -1,6 +1,7 @@
 # GeoCache: Kepler
 
 ## Problem
+
 Ein Satelit, der sich auf einer kreisförmigen
 Bahn um einen Planeten bewegt,
 ist mit einem unbekannten Objekt kollidiert
@@ -70,6 +71,7 @@ u = (R_{\text S}, 0, 0).
 $$
 
 ## Equations of motion (Newtonian Mechanics)
+
 We assume the spherical planet to be centered at the origin.
 Then, if $u = (x,y,z) \in \mathbb{R}^3$
 denotes the satelite's position in standard euclidean coordinates,
