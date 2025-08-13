@@ -19,7 +19,7 @@ R_satelit = 2. * R_planet
 # Koordinaten des Sateliten beim Zusammenstoss
 phi_0 = 0.0
 theta_0 = 0.0 # TODO: disen Parameter muss ich noch additiv anpassen
-alpha = np.pi/4.  # Winkel der Anfangsgeschwindigkeit
+alpha = np.pi/8.  # Winkel der Anfangsgeschwindigkeit
 
 # INITIAL CONIDTIONS
 # ------------------
@@ -36,4 +36,5 @@ def get_initial_conditions(baffle: float) -> InitialConditions:
         r_0=R_satelit,
         r_prime_0=0.0,
         m=M_satelit,
-        M=M_planet)
+        M=M_planet,
+        alpha=alpha)

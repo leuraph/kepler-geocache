@@ -8,7 +8,11 @@ import numpy as np
 
 
 def main() -> None:
-    baffle = 0.6
+    cache_coordinate_N = 47.44670
+    cache_coordinate_O = 8.12868
+
+    baffle = 0.53283236
+    O_initial = -5.287518
 
     # EXPERIMENT
     # ----------
@@ -43,18 +47,14 @@ def main() -> None:
 
     N, O = get_final_coordinates(
         theta_initial=0.0,
-        phi_initial=0.0,
+        phi_initial=O_initial * (2.*np.pi/360.),
         theta_hit=theta_hit_ode_1,
         t_hit=t_hit_from_theta_hit_closed,
-        omega_planet=omega_planet)
+        omega_planet=omega_planet,
+        initial_conditions=initial_conditions)
     
     print(f'(N, O) = ({N}, {O})')
-
-    theta = N / 360. * 2.*np.pi
-    phi = O / 360. * 2.*np.pi + t_hit_from_theta_hit_closed*omega_planet
-
-    d_theta = np.arccos(np.cos(theta) * np.cos(phi))
-    print(d_theta)
+    print(f'(N_cache, O_cache) = ({cache_coordinate_N}, {cache_coordinate_O})')
 
 
 if __name__ == '__main__':
