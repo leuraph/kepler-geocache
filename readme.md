@@ -2,6 +2,7 @@
 
 ## Problem
 
+
 Ein Satelit, der sich auf einer kreisförmigen
 Bahn um einen Planeten bewegt,
 ist mit einem unbekannten Objekt kollidiert
@@ -10,7 +11,7 @@ und deshalb auf den Planeten gestürzt.
 Der kugelförmige Planet dreht sich
 mit einer Tagesdauer von $24~\text{h}$
 von Westen nach Osten,
-hat einen Radius von $R_{\text{P}} = 5700$ km,
+hat einen Radius von $R_{\text{P}} = 5700~\text{km}$,
 und eine Dichte von
 $\rho_{\text{P}} = 3.344~\frac{\text{g}}{\text{cm}^3}$.
 
@@ -34,6 +35,7 @@ von seiner Anfangsgeschwindigkeit.
 Wo ist der Satelit auf den Planeten gestürzt?
 
 ## Computing Initial Conditions
+
 
 Zuerst bestimmen wir die Masse des Planeten mit
 $$
@@ -71,6 +73,7 @@ u = (R_{\text S}, 0, 0).
 $$
 
 ## Equations of motion (Newtonian Mechanics)
+
 
 We assume the spherical planet to be centered at the origin.
 Then, if $u = (x,y,z) \in \mathbb{R}^3$
@@ -141,6 +144,7 @@ and $\omega_{\text P}$ denotes the planet's angular velocity
 ($\omega = 2\pi f = \frac{2\pi}{T}$).
 
 ## Equations of motion (Kepler)
+
 
 In the following, we drop the indices $\text S$ and $\text P$.
 Due to the conservation of angular momentum,
