@@ -36,11 +36,10 @@ Wo ist der Satelit auf den Planeten gestürzt?
 
 ## Computing Initial Conditions
 
-
 Zuerst bestimmen wir die Masse des Planeten mit
-$$
+```math
 M_{\text P} = \rho_{\text P} \frac{4\pi}{3} R_{\text{P}}^3.
-$$
+```
 Um die Bahngeschwindigkeit $v_{\text{S}}$ des Sateliten
 vor der Kollision zu bestimmen, setzen wir die Zentripetalkraft
 mit der Gravitationskraft gleich, i.e.
