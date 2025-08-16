@@ -23,7 +23,7 @@ hat sich der Satelit bei genau
 $-5.287518$
 Grad Osten über dem Äquator befunden und seine Geschwindigkeit hat
 (von Norden aus gemessen), genau
-$\pi / 8$ (in Bogenmass)
+$\frac{\pi}{8}$ (in Bogenmass)
 in Richtung Osten gezeigt.
 
 Durch den Aufprall wurde der Satelit **abgebremst**,
