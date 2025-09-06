@@ -36,12 +36,18 @@ Wo ist der Satelit auf den Planeten gestürzt?
 
 ## Computing Initial Conditions
 
+Wir setzen den Ursprung eines kartesischen Koordinatensystems
+ins Zentrum des Planeten.
+Die z-Achse wählen wir parallel zut Rotationsachse,
+sodass der Nordpol die Koordinaten
+$(0, 0, R_{\text P})$ besitzt.
+
 Zuerst bestimmen wir die Masse des Planeten mit
 ```math
 M_{\text P} = \rho_{\text P} \frac{4\pi}{3} R_{\text{P}}^3.
 ```
-
-Um die Bahngeschwindigkeit $v_{\text{S}}$ des Sateliten
+wo $\rho_{\text{P}}$ die Dichte des Planeten bezeichnet.
+Um die Bahngeschwindigkeit des Sateliten $v_{\text{S}}$
 vor der Kollision zu bestimmen, setzen wir die Zentripetalkraft
 mit der Gravitationskraft gleich, i.e.
 
@@ -51,7 +57,7 @@ mit der Gravitationskraft gleich, i.e.
 \frac{m_{\text{S}}v_{\text{S}}^2}{R_{\text{S}}},
 ```
 
-wobei sich die Masse des Sateliten $m_{\text S}$ sowieso rausstreicht.
+wobei sich die Masse des Sateliten $m_{\text S}$ rausstreicht.
 Wir finden also
 
 ```math
@@ -60,9 +66,10 @@ v_{\text{S}}
 = \sqrt{\frac{GM_{\text{P}}}{2 R_{\text{P}}}}.
 ```
 
-Wenn $\gamma = 0.53283236$,
-dann ist die Geschwindigkeit des Sateliten nach der Kollision
-gegenen durch $\gamma v_{\text S}$.
+Die Geschwindigkeit des Sateliten nach der Kollision
+ist gegenen durch $\tilde v_{\text S} = \gamma v_{\text S}$,
+wobei wir wissen, dass
+$\gamma = 0.53283236$.
 Der Geschwindigkeitsvektor unmittelbar nach der Kollision ist demnach
 
 ```math
@@ -72,27 +79,48 @@ v =
 \cos(\alpha) \gamma v_\text{S}),
 ```
 wobei $\alpha = \frac{\pi}{8}$.
-Die Position des Sateliten unmittelbar nach der Kollision ist
+Die Position des Sateliten zum Zeitpunkt der Kollision ist
 ```math
 u = (R_{\text S}, 0, 0).
 ```
 
-## Equations of motion (Newtonian Mechanics)
+# Equations of motion
+
+Gegeben die Anfangszustände des Planet-Satelit Systems,
+gibt es verschiedene Möglichkeiten,
+den Ort des Einschlags zu berechnen.
+Wir wählen zwei verschiedene Methoden,
+um die Konsistenz unserer Rechnungen zu überprüfen.
+__Zuerst__ stellen wir die Bewegungsgleichungen
+mithilfe der Newton Mechanik auf und integrieren
+die resulierende gewöhnliche Differentialgleichung
+bis zu einem (unbekannten) Zeitpunkt $t^\star > t_{\text{Kollision}}$.
+Um den Einschlagsort zu berechnen,
+benutzen wir zusätzlich eine Routine zur Nullstellensuche,
+Details dazu weiter unten.
+__Im zweiten Fall__ betrachten wir das Problem
+als das wohlbekannte Kepler'sche Zentralkraftproblem
+und ziehen bekannte Literatur hinzu, um das reduzierte
+zweidimensionale problem analytisch zu lösen,
+sodass wir letztlich nur noch eine numerische Inetrgation
+durchführen müssen.
+
+## Equations of motion (EOM): Newtonian Mechanics
 
 
 We assume the spherical planet to be centered at the origin.
 Then, if $u = (x,y,z) \in \mathbb{R}^3$
-denotes the satelite's position in standard euclidean coordinates,
+denotes the satellite's position in standard euclidean coordinates,
 the Gravitational force acting on it is given by
 $F(u) = - \frac{GMm}{\|u\|^3} u$.
-The correspondind Equation of motion (EOM)
+The corresponding Equation of motion (EOM)
 is then given by
 ```math
 \ddot u = - \frac{GM}{\|u\|^3} u.
 ```
 Writing
 $k:= GM$, $r := \sqrt{x^2 + y^2 + z^2}$, and
-$Y = (x,y,z,\dot x, \dot y, \dot z)$
+$Y := (x,y,z,\dot x, \dot y, \dot z) \in \mathbb R^6$
 yields the ODE
 ```math
 \dot Y
@@ -116,29 +144,34 @@ Y_0 =
 where $\alpha = \frac{\pi}{8}$
 and $\gamma = 0.53283236$,
 the ODE may be numerically integrated over
-$(0, t_{\text{end}})$, $t_{\text{end}} > 0$.
+$(0, t^\star)$, $t^\star > 0 =: t_{\text{Kollision}}$.
 To find the coordinates of impact,
-one may define a function
+one may first define a function
 $F : (0, \infty) \to \mathbb R$,
 
 ```math
-F(t_{\text{end}})
+F(t^\star)
 :=
-R(\tilde u (t_{\text{end}})) - R_{\text{P}},
+R(\tilde u (t^\star) - R_{\text{P}},
 ```
 
 where $\tilde u$ is the numerically integrated solution of the ODE,
 $R(u) := \sqrt{x^2 + y^2 + z^2}$,
-and $R_{\text P}$ denotes the radius of the planet,
-and then apply a root finding algorithm to $F$.
-Then, the coordinates of impact may first be transformed
+and $R_{\text P}$ denotes the radius of the planet.
+Then, we apply a root finding algorithm to $F$,
+yielding both the time of impact $t_{\text{hit}}$
+and the corresponding euclidean coordinates
+$u_{\text{hit}}=(x_{\text{hit}}, y_{\text{hit}}, z_{\text{hit}})$
+(care must be taken as there are several roots).
+Then, the coordinates of impact are first transformed
 to spherical coordinates
 $(r_{\text{hit}}, \theta_{\text{hit}}, \phi_{\text{hit}})$,
 where $r$ denotes the radial distance to the origin,
 $\theta$ is the polar angle measured from the positive $z$-axis,
 and $\phi$ the azimuthal angle measured from the positive $x$-axis
 (see [wiki](https://en.wikipedia.org/wiki/Spherical_coordinate_systemhttps://en.wikipedia.org/wiki/Spherical_coordinate_system)).
-Finally, the coordinates of impact may be calculated with
+Finally, as the planet is rotating,
+the coordinates of impact may be calculated with
 
 ```math
 (N, E)
@@ -154,7 +187,7 @@ $E_{\text{initial}} = −5.287518$,
 and $\omega_{\text P}$ denotes the planet's angular velocity
 ($\omega = 2\pi f = \frac{2\pi}{T}$).
 
-## Equations of motion (Kepler)
+## Equations of motion (EOM): Kepler
 
 
 In the following, we drop the indices $\text S$ and $\text P$.
@@ -176,7 +209,7 @@ The Lagrangian of the system is given by
 where the Gravitational Potential $V$ is given by
 
 ```math
-    V(r) = - \frac{GMm}{r},
+    V(r) = - \frac{GMm}{r}.
 ```
 
 The Euler-Lagrange Equations are given by
