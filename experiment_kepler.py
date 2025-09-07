@@ -8,15 +8,18 @@ import numpy as np
 
 
 def main() -> None:
+    # These are the actual coordinates of the cache
+    # ---------------------------------------------
     cache_coordinate_N = 47.44670
     cache_coordinate_O = 8.12868
+    # ---------------------------------------------
 
-    baffle = 0.53283236
+    gamma = 0.53283236
     O_initial = -5.287518
 
     # EXPERIMENT
     # ----------
-    initial_conditions = get_initial_conditions(baffle=baffle)
+    initial_conditions = get_initial_conditions(baffle=gamma)
 
     # THETA HIT
     # ---------
