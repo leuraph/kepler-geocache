@@ -2,8 +2,11 @@ from utils import compute_final_coordinates_newton
 
 
 def main():
+    # These are the actual coordinates of the cache
+    # ---------------------------------------------
     cache_coordinate_N = 47.44670
     cache_coordinate_O = 8.12868
+    # ---------------------------------------------
 
     baffle = 0.53283236
     O_initial = -5.287518
