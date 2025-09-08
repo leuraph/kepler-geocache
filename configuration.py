@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from initial_conditions import InitialConditions, angular_momentum
 import numpy as np
 from scipy.constants import G
-from utils import get_total_energy, get_angular_momentum
+from physics import get_total_energy, get_angular_momentum
 
 @dataclass
 class Configuration:
