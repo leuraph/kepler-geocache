@@ -1,4 +1,3 @@
-from utils import compute_final_coordinates_newton
 from configuration import get_initial_conditions_newton, Configuration
 from utils import RootMemory, euclidean_to_spherical
 from scipy.constants import G
