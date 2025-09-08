@@ -67,10 +67,11 @@ def main():
     # planet is rotating during the fall
     phi_hit -= t_hit * Configuration.omega_planet
 
-    O = phi_hit / (2.*np.pi) * 360. + O_initial
+    O = (phi_hit + Configuration.phi_0) / (2.*np.pi) * 360.
     N = theta_hit_tilde / (2.*np.pi) * 360.
 
-    print(f'(N, O) = ({N}, {O})')
+    print(f'GeoCache:   (N, O) \t= ({cache_coordinate_N}, \t\t{cache_coordinate_O})')
+    print(f'Experiment: (N, O) \t= ({N}, \t{O})')
 
 
 if __name__ == '__main__':
