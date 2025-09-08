@@ -31,6 +31,8 @@ class Configuration:
 class InitialConditionsNewton:
     initial_position: tuple[float, float, float]  # euclidean initial coordinates
     initial_velocity: tuple[float, float, float]  # euclidean initial velocity
+    Y_0: tuple[float, float, float, float, float, float]
+
 
 
 def get_initial_conditions_newton() -> InitialConditionsNewton:
@@ -49,9 +51,13 @@ def get_initial_conditions_newton() -> InitialConditionsNewton:
     z_dot_0 = np.cos(Configuration.alpha) * v_0_tilde
     u_dot_0 = [x_dot_0, y_dot_0, z_dot_0]
 
+    # combined 6-dimensional components
+    Y_0 = [x_0, y_0, z_0, x_dot_0, y_dot_0, z_dot_0]
+
     return InitialConditionsNewton(
         initial_position=u_0,
-        initial_velocity=u_dot_0)
+        initial_velocity=u_dot_0,
+        Y_0=Y_0)
 
 
 @dataclass
