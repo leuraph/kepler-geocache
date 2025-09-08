@@ -14,23 +14,6 @@ def main():
     cache_coordinate_O = 8.12868
     # ---------------------------------------------
 
-    baffle = 0.53283236
-    O_initial = -5.287518
-
-    N, O = compute_final_coordinates_newton(
-        baffle=baffle, O_initial=O_initial)
-
-    print(f'(N, O) = ({N}, {O})')
-    print(f'(N_cache, O_cache) = ({cache_coordinate_N}, {cache_coordinate_O})')
-
-    # refactored version
-
-    # These are the actual coordinates of the cache
-    # ---------------------------------------------
-    cache_coordinate_N = 47.44670
-    cache_coordinate_O = 8.12868
-    # ---------------------------------------------
-
     initial_conditions_newton = get_initial_conditions_newton()
 
     root_memory = RootMemory()
@@ -74,14 +57,12 @@ def main():
 
     _, theta_hit, phi_hit = euclidean_to_spherical(
         x=x_hit, y=y_hit, z=z_hit)
-    
-    theta_hit_tilde = np.pi/2. - theta_hit
-    
-    d_angle = np.arccos(np.cos(phi_hit)*np.cos(theta_hit_tilde))
-    beta = np.arcsin( np.sin(theta_hit_tilde) / np.sin(d_angle))
 
-    print(f'd_angle = {d_angle}')
-    print(f'beta_comp = {beta}, beta_initial = {np.pi/2. - Configuration.alpha}')
+    # looking at the definition of spherical coordinates,
+    # we need to transform the theta coordinate to receive
+    # the angle measured from equator instead of the angle
+    # measured from north pole
+    theta_hit_tilde = np.pi/2. - theta_hit
 
     # planet is rotating during the fall
     phi_hit -= t_hit * Configuration.omega_planet
@@ -90,9 +71,6 @@ def main():
     N = theta_hit_tilde / (2.*np.pi) * 360.
 
     print(f'(N, O) = ({N}, {O})')
-
-
-
 
 
 if __name__ == '__main__':
