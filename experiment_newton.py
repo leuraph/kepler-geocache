@@ -70,7 +70,7 @@ def main():
     O = (phi_hit + Configuration.phi_0) / (2.*np.pi) * 360.
     N = theta_hit_tilde / (2.*np.pi) * 360.
 
-    print(f'GeoCache:   (N, O) \t= ({cache_coordinate_N}, \t\t{cache_coordinate_O})')
+    print(f'GeoCache:   (N, O) \t= ({cache_coordinate_N:.5f}, \t\t{cache_coordinate_O:.5f})')
     print(f'Experiment: (N, O) \t= ({N}, \t{O})')
 
 
