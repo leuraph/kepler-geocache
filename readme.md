@@ -294,3 +294,9 @@ the first order system reduces to
 \end{equation}
 ```
 
+# Solution(s)
+
+## Newtonian approach
+A possible solution using standard Newtonian physics is given in `experiment_newton.py`.
+To run the experiment, install all dependencies (in an isolated environment),
+e.g. do `pip install -r requirements.txt`, and then simply run the script.
