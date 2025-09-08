@@ -1,4 +1,4 @@
-from scipy.conftest import G
+from scipy.constants import G
 
 def get_angular_momentum(
         m: float,
